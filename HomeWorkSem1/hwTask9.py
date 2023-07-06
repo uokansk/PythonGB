@@ -2,5 +2,5 @@
 print('Таблица умножения')
 for i in range(2, 10):
     for j in range(2, 10):
-        print(f'{j} * {i} = {i * j}\t', end='   ')
+        print(f'{j} x {i} = {i * j}\t', end='   ')
     print()
