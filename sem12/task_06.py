@@ -1,12 +1,3 @@
-# Доработайте класс прямоугольник из прошлых семинаров.
-# Добавьте возможность изменять длину и ширину
-# прямоугольника и встройте контроль недопустимых значений (отрицательных).
-# Используйте декораторы свойств.
-# Доработаем прямоугольник и добавим экономию памяти
-# для хранения свойств экземпляра без словаря __dict__.
-
-# Изменяем класс прямоугольника.
-# Заменяем пару декораторов проверяющих длину и ширину на дескриптор с валидацией размера.
 import sys
 
 
@@ -21,7 +12,7 @@ class Descriptor:
         if value > 0:
             setattr(instance, self.name, value)
         else:
-            raise ValueError('Отрицательные и нулевые не допустимы')
+            raise ValueError('Negative and zero are not allowed')
 
 
 class Rectangle:
@@ -79,11 +70,11 @@ if __name__ == '__main__':
     rect_2 = Rectangle(10, 20)
     # rect_1.side_a = 7
     # print(rect_1.side_a)
-    rect_3 = rect_1 + rect_2
-    rect_4 = rect_2 - rect_1
+    # rect_3 = rect_1 + rect_2
+    # rect_4 = rect_2 - rect_1
     #
-    print(f'{rect_1.side_a = }, {rect_1.side_b = }, {rect_1.perimeter()}')
-    print(f'{rect_3.side_a = }, {rect_3.side_b = }, {rect_3.perimeter()}')
-    print(f'{rect_4.side_a = }, {rect_4.side_b = }, {rect_4.perimeter()}')
+    # print(f'{rect_1.side_a = }, {rect_1.side_b = }, {rect_1.perimeter()}')
+    # print(f'{rect_3.side_a = }, {rect_3.side_b = }, {rect_3.perimeter()}')
+    # print(f'{rect_4.side_a = }, {rect_4.side_b = }, {rect_4.perimeter()}')
 
     print(sys.getsizeof(rect_1))
