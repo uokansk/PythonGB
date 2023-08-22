@@ -1,0 +1,3 @@
+parent_directory,is_file,name,size_in_bytes
+./my_folder,True,aaaa1.py,0
+./my_folder,True,bbbb2.py,0

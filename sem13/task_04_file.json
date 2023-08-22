@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Masha",
+    "user_id": 13,
+    "access_level": 2
+  },
+  {
+    "name": "Konstantin",
+    "user_id": 12,
+    "access_level": 2
+  },
+  {
+    "name": "Alexandr",
+    "user_id": 14,
+    "access_level": 4
+  },
+  {
+    "name": "Anton",
+    "user_id": 15,
+    "access_level": 1
+  }
+]
