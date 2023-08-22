@@ -1,4 +1,4 @@
-# -*- coding: cp1251 -*-
+
 # ¬озьмите 1-3 задачи из тех, что были на прошлых
 # семинарах или в домашних задани€х. Ќапишите к ним
 # классы исключени€ с выводом подробной информации.
@@ -77,7 +77,7 @@ if __name__ == '__main__':
 
     stud_1.add_grade('иностранный €зык', 3)
     stud_1.add_grade('биологи€', 2)
-    stud_1.add_test_score('биологи€', 200)
+    stud_1.add_test_score('биологи€', 78)
     print(stud_1.family, stud_1.name, stud_1.surname, stud_1.subjects)
     print(stud_1.average_grade())
     print(stud_1.average_test_score())
