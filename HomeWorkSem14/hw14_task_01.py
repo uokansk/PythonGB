@@ -1,4 +1,3 @@
-
 # Возьмите 1-3 задачи из тех, что были на прошлых
 # семинарах или в домашних заданиях. Напишите к ним
 # классы исключения с выводом подробной информации.
@@ -8,6 +7,7 @@
 
 
 import csv
+import unittest
 
 
 class MyException(Exception):
@@ -15,6 +15,7 @@ class MyException(Exception):
 
 
 class InvalidNameError(MyException):
+
     def __init__(self, message="ФИО студента введено неверно. Оно должно содержать только буквы "
                                "и начинаться с заглавной буквы."):
         self.message = message
@@ -36,6 +37,15 @@ class ScoreError(MyException):
 
 class Student:
     def __init__(self, family, name, surname, csv_file):
+        """
+        >>> s = Student('Ivanov', 'Ivan', 'Ivanovuch', 'subjects.csv')
+        >>> s.family
+        'Ivanov'
+        >>> s.name
+        'Ivan'
+        >>> s.surname
+        'Ivanovuch'
+        """
         if not name.istitle() or not name.replace(" ", "").isalpha() \
                 or not family.istitle() or not family.replace(" ", "").isalpha() \
                 or not surname.istitle() or not surname.replace(" ", "").isalpha():
@@ -50,7 +60,13 @@ class Student:
             self.subjects = {row[0]: {"grades": [], "test_scores": []} for row in reader}
 
     def add_grade(self, subject, grade):
-
+        """
+        >>> s = Student('Ivanov', 'Ivan', 'Ivanovuch', 'subjects.csv')
+        >>> s.add_grade('иностранный язык', 7)
+        Traceback (most recent call last):
+        ...
+        ScoreError: Оценка '7' недействителен. Оценки должны быть от 2 до 5, а результаты тестов от 0 до 100.
+        """
         if subject not in self.subjects:
             raise SubjectError(subject)
         if grade < 2 or grade > 5:
@@ -58,6 +74,13 @@ class Student:
         self.subjects[subject]["grades"].append(grade)
 
     def add_test_score(self, subject, score):
+        """
+        >>> s = Student('Ivanov', 'Ivan', 'Ivanovuch', 'subjects.csv')
+        >>> s.add_test_score('иностранный язык', 200)
+        Traceback (most recent call last):
+        ...
+        ScoreError: Оценка '200' недействителен. Оценки должны быть от 2 до 5, а результаты тестов от 0 до 100.
+        """
         if subject not in self.subjects:
             raise SubjectError(subject)
         if score < 0 or score > 100:
@@ -73,13 +96,23 @@ class Student:
         return sum(total_grades) / len(total_grades) if total_grades else 0
 
 
-if __name__ == '__main__':
-    stud_1 = Student('Ivanov', 'Ivan', 'Ivanovuch', 'subjects.csv')
+class TestUpperName(unittest.TestCase):
+    def test_return_family(self):
+        s = Student('Ivanov', 'Ivan', 'Ivanovuch', 'subjects.csv')
+        self.assertEqual(s.family, 'Ivanov')
 
-    stud_1.add_grade('иностранный язык', 3)
-    stud_1.add_grade('биология', 2)
-    stud_1.add_test_score('биология', 78)
-    # print(stud_1.add_grade)
-    # print(stud_1.family, stud_1.name, stud_1.surname, stud_1.subjects)
-    print(stud_1.average_grade())
-    # print(stud_1.average_test_score())
+    def test_return_name(self):
+        s = Student('Ivanov', 'Ivan', 'Ivanovuch', 'subjects.csv')
+        self.assertEqual(s.name, 'Ivan')
+
+    def test_average_grade(self):
+        s = Student('Ivanov', 'Ivan', 'Ivanovuch', 'subjects.csv')
+        s.add_grade('иностранный язык', 3)
+        self.assertEqual(s.average_grade(), 3)
+
+
+if __name__ == '__main__':
+    import doctest
+
+    doctest.testmod(verbose=True)
+    unittest.main()
