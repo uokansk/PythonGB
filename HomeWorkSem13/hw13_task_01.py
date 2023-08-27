@@ -74,7 +74,7 @@ class Student:
 
 
 if __name__ == '__main__':
-    stud_1 = Student('Ivanov', 'Ivan', 'Ivanovuch', 'subjects.csv')
+    stud_1 = Student('Ivanov', 'ivan', 'Ivanovuch', 'subjects.csv')
 
     stud_1.add_grade('иностранный язык', 3)
     stud_1.add_grade('биология', 2)
